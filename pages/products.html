@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Products</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 40px auto;
+      }
+      h1 {
+        color: #333;
+      }
+      .product {
+        padding: 12px;
+        margin: 8px 0;
+        background: #f5f5f5;
+        border-radius: 6px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .product .name {
+        font-weight: bold;
+      }
+      .product .price {
+        color: green;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h1>Product List</h1>
+    <div id="products">Loading...</div>
+
+    <script>
+      async function loadProducts() {
+        try {
+          const res = await axios.get("/api/products");
+          const container = document.getElementById("products");
+          container.innerHTML = res.data.products
+            .map(
+              (p) => `<div class="product">
+            <span class="name">${p.name}</span>
+            <span class="price">${p.price.toLocaleString()} LKR</span>
+          </div>`,
+            )
+            .join("");
+        } catch (err) {
+          document.getElementById("products").textContent =
+            "Failed to load products.";
+        }
+      }
+
+      loadProducts();
+    </script>
+  </body>
+</html>
