@@ -10,6 +10,8 @@ test("Mock API example", async ({ page }) => {
       products: [
         { name: "Laptop", price: 350000 },
         { name: "Phone", price: 150000 },
+        { name: "Tablet", price: 200000 },
+        { name: "Watch", price: 50000 },
       ],
     };
 
@@ -23,7 +25,7 @@ test("Mock API example", async ({ page }) => {
   const filePath = path.resolve(__dirname, "../pages/products.html");
   await page.goto(`file://${filePath}`);
 
-  await expect(page.locator(".product")).toHaveCount(2);
+  await expect(page.locator(".product")).toHaveCount(4);
   await expect(page.locator(".product .name").first()).toHaveText("Laptop");
   
 
