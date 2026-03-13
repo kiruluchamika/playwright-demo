@@ -5,13 +5,13 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 test("Mock API example", async ({ page }) => {
-  await page.route("**/api/products", async (route) => {
+  await page.route("**/api/services", async (route) => {
     const mockResponse = {
-      products: [
-        { name: "Laptop", price: 350000 },
-        { name: "Phone", price: 150000 },
-        { name: "Tablet", price: 200000 },
-        { name: "Watch", price: 50000 },
+      services: [
+        { name: "IT Support", price: 35000 },
+        { name: "Cleaning Service", price: 15000 },
+        { name: "Digital Marketing", price: 20000 },
+        { name: "Tutoring", price: 5000 },
       ],
     };
 
@@ -22,11 +22,11 @@ test("Mock API example", async ({ page }) => {
     });
   });
 
-  const filePath = path.resolve(__dirname, "../pages/products.html");
+  const filePath = path.resolve(__dirname, "../pages/services.html");
   await page.goto(`file://${filePath}`);
 
-  await expect(page.locator(".product")).toHaveCount(4);
-  await expect(page.locator(".product .name").first()).toHaveText("Laptop");
+  await expect(page.locator(".service")).toHaveCount(4);
+  await expect(page.locator(".service .name").first()).toHaveText("IT Support");
   
 
   await page.pause();

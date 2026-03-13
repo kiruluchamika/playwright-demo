@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Products</title>
+    <title>Services</title>
     <style>
       :root {
         --bg-a: #f8f6f2;
@@ -73,7 +73,7 @@
         font-size: 0.96rem;
       }
 
-      #products {
+      #services {
         display: grid;
         gap: 10px;
       }
@@ -84,7 +84,7 @@
         font-size: 0.95rem;
       }
 
-      .product {
+      .service {
         padding: 14px 16px;
         background: linear-gradient(180deg, #ffffff, #f8f6f1);
         border-radius: 12px;
@@ -97,19 +97,19 @@
         animation-delay: calc(var(--i, 0) * 70ms);
       }
 
-      .product:hover {
+      .service:hover {
         border-color: rgba(85, 128, 98, 0.48);
         transform: translateY(-1px);
         transition: transform 180ms ease, border-color 180ms ease;
       }
 
-      .product .name {
+      .service .name {
         font-weight: 600;
         color: var(--ink-900);
         letter-spacing: 0.01em;
       }
 
-      .product .price {
+      .service .price {
         color: var(--accent);
         background: var(--accent-soft);
         border: 1px solid rgba(46, 122, 79, 0.26);
@@ -141,13 +141,13 @@
           padding: 18px;
         }
 
-        .product {
+        .service {
           padding: 12px;
           flex-wrap: wrap;
           row-gap: 8px;
         }
 
-        .product .price {
+        .service .price {
           margin-left: auto;
         }
       }
@@ -156,36 +156,36 @@
   </head>
   <body>
     <main class="shell">
-      <h1>Product List</h1>
+      <h1>Service List</h1>
       <p class="subtitle">Mock-ready catalog for API testing workflows.</p>
-      <div id="products"><p class="status">Loading...</p></div>
+      <div id="services"><p class="status">Loading...</p></div>
     </main>
 
     <script>
-      async function loadProducts() {
+      async function loadServices() {
         try {
-          const res = await axios.get("/api/products");
-          const products = Array.isArray(res.data.products) ? res.data.products : [];
-          const container = document.getElementById("products");
-          container.innerHTML = products
+          const res = await axios.get("/api/services");
+          const services = Array.isArray(res.data.services) ? res.data.services : [];
+          const container = document.getElementById("services");
+          container.innerHTML = services
             .map(
-              (p, index) => `<div class="product" style="--i:${index}">
+              (p, index) => `<div class="service" style="--i:${index}">
             <span class="name">${p.name}</span>
             <span class="price">${Number(p.price).toLocaleString()} LKR</span>
           </div>`,
             )
             .join("");
 
-          if (!products.length) {
-            container.innerHTML = '<p class="status">No products available right now.</p>';
+          if (!services.length) {
+            container.innerHTML = '<p class="status">No services available right now.</p>';
           }
         } catch (err) {
-          document.getElementById("products").textContent =
-            "Failed to load products.";
+          document.getElementById("services").textContent =
+            "Failed to load services.";
         }
       }
 
-      loadProducts();
+      loadServices();
     </script>
   </body>
 </html>
